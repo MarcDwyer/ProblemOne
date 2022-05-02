@@ -74,6 +74,14 @@ function isGuest(booking) {
   return booking["guest_type"] === "guest";
 }
 
+function sortOnLastAndFirst(a, b) {
+  const aName = `${a.last_name}, ${a.first_name}`;
+  const bName = `${b.last_name}, ${b.first_name}`;
+  if (aName > bName) return 1;
+  else if (aName < bName) return -1;
+  return 0;
+}
+
 function mutateArray(a) {
   const resultArray = [];
 
@@ -88,6 +96,8 @@ function mutateArray(a) {
       resultArray.push(booking);
     }
   }
+  resultArray.sort(sortOnLastAndFirst);
+
   return resultArray;
 }
 
