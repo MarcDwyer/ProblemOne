@@ -62,15 +62,22 @@ function flattenBooking(booking) {
     delete booking[guestBookingKey];
     booking["some_array"] = someArray;
   }
-  return booking;
 }
 
+function setSumOfSomeArray(booking) {
+  const total = booking["some_array"].reduce((acc, curr) => acc + curr);
+
+  booking["sum_total"] = total;
+}
 function mutateArray(a) {
   for (let index = 0; index < a.length; index++) {
     const booking = a[index];
 
-    const newBooking = flattenBooking(booking);
-    a[index] = newBooking;
+    flattenBooking(booking);
+
+    setSumOfSomeArray(booking);
+
+    a[index] = booking;
   }
   return a;
 }
