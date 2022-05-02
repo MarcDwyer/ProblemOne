@@ -59,7 +59,7 @@ function flattenBooking(booking) {
   const guestBookingKey = "guest_booking";
   if (guestBookingKey in booking) {
     const someArray = booking[guestBookingKey]["some_array"];
-    delete booking[guestBookingKey];
+    delete booking[guestBookingKey]["some_array"];
     booking["some_array"] = someArray;
   }
 }
@@ -69,7 +69,14 @@ function setSumOfSomeArray(booking) {
 
   booking["sum_total"] = total;
 }
+
+function isGuest(booking) {
+  return booking["guest_type"] === "guest";
+}
+
 function mutateArray(a) {
+  const resultArray = [];
+
   for (let index = 0; index < a.length; index++) {
     const booking = a[index];
 
@@ -77,9 +84,11 @@ function mutateArray(a) {
 
     setSumOfSomeArray(booking);
 
-    a[index] = booking;
+    if (isGuest(booking)) {
+      resultArray.push(booking);
+    }
   }
-  return a;
+  return resultArray;
 }
 
 $(document).ready(function () {
