@@ -74,6 +74,7 @@ function isGuest(booking) {
   return booking["guest_type"] === "guest";
 }
 
+// Sorts an array with last name being priority and then first name.
 function sortOnLastAndFirst(a, b) {
   const aName = `${a.last_name}, ${a.first_name}`;
   const bName = `${b.last_name}, ${b.first_name}`;
